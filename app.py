@@ -36,4 +36,4 @@ def get_data():
     return jsonify(data_store)
 
 if __name__ == '__main__':
-    app.run(host='Mobina.access.ly', port=443, ssl_context=('mycertificate.crt','myprivate.key'), debug=True)
+    app.run(host='Mobina.access.ly', port=5000, ssl_context=('mycertificate.crt','myprivate.key'), debug=True)
