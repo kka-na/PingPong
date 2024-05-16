@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Call Robo Taxi</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body align="center">
+    <p >고급실무실습 CVLab팀</p>
+    <h1>Call Robo Taxi Application</h1>
+    <form id="postForm">
+        <label for="user_id">User ID:</label>
+        <input type="text" id="user_id" name="user_id"><br><br>
+        <input type="button"  class="button-76" value="Call" onclick="sendPostRequest('call')">
+        <input type="button"  class="button-77" value="Go" onclick="sendPostRequest('go')">
+    </form>
+    <p id="response"></p>
+    
+    <script>
+        function sendPostRequest(state) {
+            const user_id = document.getElementById('user_id').value;
+
+            if (!user_id) {
+                alert('Please enter a user ID.');
+                return;
+            }
+
+            // 위치 정보를 가져오는 함수
+            function getPosition() {
+                return new Promise((resolve, reject) => {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            position => {
+                                resolve({
+                                    latitude: position.coords.latitude,
+                                    longitude: position.coords.longitude
+                                });
+                            },
+                            error => reject(error)
+                        );
+                    } else {
+                        reject(new Error('Geolocation is not supported by this browser.'));
+                    }
+                });
+            }
+
+            getPosition().then(position => {
+                const data = {
+                    user_id: user_id,
+                    state: state,
+                    position: {
+                        latitude: position.latitude,
+                        longitude: position.longitude
+                    }
+                };
+
+                fetch('/post', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('response').innerText = JSON.stringify(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }).catch(error => {
+                console.error('Error getting position:', error);
+                alert('Could not get your location.');
+            });
+        }
+    </script>
+</body>
+</html>
