@@ -8,10 +8,22 @@
     <p >고급실무실습 CVLab팀</p>
     <h1>Call Robo Taxi Application</h1>
     <form id="postForm">
-        <label for="user_id">User ID:</label>
-        <input type="text" id="user_id" name="user_id"><br><br>
-        <input type="button"  class="button-76" value="Call" onclick="sendPostRequest('call')">
-        <input type="button"  class="button-77" value="Go" onclick="sendPostRequest('go')">
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="User ID" name="user_id" id='user_id' required />
+            <label for="user_id" class="form__label">User ID</label>
+        </div>
+        <br><br>
+        <div>
+            <input type="button"  class="button-76" value="Call" onclick="sendPostRequest('call')">
+            <input type="button"  class="button-77" value="Go" onclick="sendPostRequest('go')">
+        </div>
+        <br>
+        <div>
+            <input type="button"  class="button-78" value="Destination1" onclick="sendPostRequest('dest1')">
+            <input type="button"  class="button-78" value="Destination2" onclick="sendPostRequest('dest2')">
+            <input type="button"  class="button-78" value="Destination3" onclick="sendPostRequest('dest3')">
+        </div>
+        
     </form>
     <p id="response"></p>
     

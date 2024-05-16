@@ -6,7 +6,7 @@ Flask application : Client
 import requests
 import json
 
-url = 'http://127.0.0.1:5000/post'
+url = 'http://Mobina.access.ly:5000/post'
 
 file_path = './taxi.json'
 
